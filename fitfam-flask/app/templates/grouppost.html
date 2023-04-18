@@ -1,0 +1,32 @@
+{% extends "nav.html" %}
+{% set active_page = "groups" %}
+{% block content %}
+    <h1 class="large centeralign">NEW POST</h1>
+    <form action="" method="post" enctype="multipart/form-data" novalidate style="max-width:44.2em">
+        {{ form.hidden_tag() }}
+        {{ form.title.label }}<br>
+        {{ form.title(size=32) }}
+    <p>    
+        {% for error in form.title.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+        {{ form.description.label }}<br>
+        {{ form.description(rows="10", cols="80") }}
+    <p>
+        {% for error in form.description.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <div style="width:100%; display:flex;">
+        <div>{{ form.tag.label }}</div>
+        <div style="margin-left:15px; margin-right:15px; height:29.5px;">{{ form.tag }}</div>
+        <div>{{ form.group.label }}</div>
+        <div style="margin-left:15px; height:29.5px">{{ form.group }}</div><br>
+    </div>
+    <div>{{ form.img.label }}
+         {{ form.img }}
+    </div>
+    <p> {{ form.submit() }} </p>
+    </form>
+{% endblock %}

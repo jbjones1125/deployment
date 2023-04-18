@@ -1,0 +1,23 @@
+{% extends "nav.html" %}
+
+{% block content %}
+<h1 class="large centeralign">this is the profile for:</h1>
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    {{ form.answer1.label }}<br>
+    {{ form.answer1(size=32) }}
+<p>    
+    {% for error in form.answer1.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+</p>
+    {{ form.answer2.label }}<br>
+    {{ form.answer2(size=32) }}
+<p>
+    {% for error in form.answer2.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+</p>
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}

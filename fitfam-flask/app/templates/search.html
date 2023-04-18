@@ -1,0 +1,58 @@
+{% extends "nav.html" %}
+{% set active_page = "search" %}
+{% block content %}
+<section class="searchView">
+    <form>
+        <label><input name="tag" type="checkbox" value="arms"></input>Arms</label>
+        <label><input name="tag" type="checkbox" value="back"></input>Back</label>
+        <label><input name="tag" type="checkbox" value="back/bicep"></input>Back/Bicep</label>
+        <label><input name="tag" type="checkbox" value="chest"></input>Chest</label>
+        <label><input name="tag" type="checkbox" value="chest/tricep"></input>Chest/Tricep</label>
+        <label><input name="tag" type="checkbox" value="legs"></input>Legs</label>
+        <label><input name="tag" type="checkbox" value="full body"></input>Full Body</label>
+        <button class="butt" hx-post={{ url_for('searchFeed') }} hx-swap="outerHTML" hx-target="#searchFeed">Search</button>
+    </form>
+</section>
+<p></p>
+<div class="float"><a href={{ url_for('post', previousPage='home') }}><img src="/static/images/post-button.png"/></a></div>
+<div id="searchFeed">
+{% for post in posts %}
+{% if post.Posts.groupAssociation == 0 %}
+<div hx-target="this" class="card text-center" style="margin-right:25em; margin-left:25em; max-height:50%">
+    <div class="card-header">
+        <h3 style="text-align: left">
+            {% if post.User.nickname %}
+            <a style="color: black;" href={{ url_for('profile', userId = post.User.id) }}>{{ post.User.nickname }}</a>
+            {% elif post.User.firstName %}
+            <a style="color: black;" href={{ url_for('profile', userId = post.User.id) }}>{{ post.User.firstName }} {{ post.User.lastName }}</a>
+            {% endif %}
+            <span style="float: right">{{ post.Posts.postDateTime }}</span>
+        </h3>
+    </div>
+    <div class="card-body">
+        <h1 class="card-title">{{ post.Posts.postTitle }}</h1>
+        {% if post.Posts.postImage %}
+        <img src="{{ post.Posts.postImage }}" style="width:100%;height:100%;">
+        {% endif %}
+        <p class="card-text">{{ post.Posts.description }}</p>
+    </div>
+    <h4>
+        {% if post.Posts.postTags != "None" %}
+        <span class="badge bg-success">
+            {{ post.Posts.postTags }}
+        </span>
+        {% endif %}
+    </h4>
+    <div class="like">
+        {% if current_user.id == post.Posts.poster %}
+        <img class="like-button" src="/static/images/delete.png" hx-trigger="click" hx-post={{ url_for('delete') }} hx-swap="outerHTML" hx-vals='{"postId":"{{ post.Posts.postId }}"}'>
+        {% endif %}
+        <img class="like-button" src="/static/images/like.png" hx-trigger="click" hx-post={{ url_for('like') }} hx-vals='{"postId":"{{ post.Posts.postId }}"}' hx-target={{"#post"+post.Posts.postId|string}} hx-swap="outerHTML">
+        <p id="post{{post.Posts.postId}}" class="numLikes">{{ post.Posts.postLikes }}</p>
+    </div>
+</div>
+<p></p>
+{% endif %}
+{% endfor %}
+</div>
+{% endblock %}

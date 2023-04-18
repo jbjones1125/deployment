@@ -1,0 +1,110 @@
+form {
+  max-width: 32em;
+  margin: 1% auto;
+  background: #fff;
+  text-align: left;
+  padding: 1.25em;
+  outline: 0.2em solid #488084;
+}
+select {
+  padding: 0;
+  min-width: 6em;
+}
+tr {
+  margin-bottom:2px;
+}
+.delete-button {
+  max-width: unset;
+  margin: unset;
+  background: unset;
+  text-align: unset;
+  padding: unset;
+  outline: unset;
+  display: unset;
+  background: none;
+  width: 20px;
+  height: 20px;
+  float: left;
+}
+label {
+  color: #488084;
+  display: inline-block;
+  margin: 1.5em 0em 0.9375em;
+  text-transform: uppercase;
+}
+input {
+  display: block;
+  padding: 0.625em 0.375em;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 0.07em solid #ddd;
+  color: #555;
+}
+.butt {
+  background: #488084;
+  border: 0;
+  padding: 0.625em 1.25em;
+  color: white;
+  border-radius: 1.25em;
+}
+.profile {
+  margin: auto;
+  height: 100%;
+  width: 50em;
+  border: 2px solid #488084;
+  padding: 0 1%;
+  padding-bottom: 1%;
+  text-align: center;
+}
+.submit {
+  margin-top: 1.5em;
+  text-align: center;
+}
+.post {
+  width: 33%;
+  margin: auto;
+}
+.like {
+  background: none;
+  width: 15px;
+  height: 15px;
+  margin-bottom: 2%;
+  display:flex;
+  max-width: 100%;
+}
+.like-button {
+  background: none;
+  width: 20px;
+  height: 20px;
+  float: left;
+  cursor: pointer;
+}
+.numLikes {
+  float:left;
+  padding-left: 2px;
+  font-size: medium;
+  font-weight: bold;
+}
+.float{
+  position:fixed;
+  width:60px;
+  height:60px;
+  bottom:40px;
+  right:40px;
+  background-color:#488084;
+  color:#FFF;
+  border-radius:50px;
+  text-align:center;
+  box-shadow: 2px 2px 3px #999;
+}
+.chk {
+  display:flex;
+  justify-content: center;
+}
+.large {
+  color: #488084;
+  text-align: center;
+}
+textarea {
+  max-width: 100%;
+}

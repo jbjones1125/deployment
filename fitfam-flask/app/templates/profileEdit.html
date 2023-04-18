@@ -1,0 +1,24 @@
+{% extends "nav.html" %}
+{% set active_page = "Profile" %}
+
+{% block content %}
+    <form action="" method="post" novalidate>
+    <h1 class="large centeralign">this is the profile for:</h1>
+        {{ form.hidden_tag() }}
+        {{ form.nickname.label }}<br>
+        {{ form.nickname(size=32) }}
+    <p>    
+        {% for error in form.nickname.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+        {{ form.aboutme.label }}<br>
+        {{ form.aboutme(size=32) }}
+    <p>
+        {% for error in form.aboutme.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+        <p>{{ form.submit() }} <a class="butt" href={{ url_for('profile', userId=current_user.id) }}>Cancel</a></p>
+    </form>
+{% endblock %}

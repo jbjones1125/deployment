@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }}</title>
+        {% else %}
+        <title>fitfam</title>
+        {% endif %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/materia/bootstrap.min.css"
+          integrity="sha384-B4morbeopVCSpzeC1c4nyV0d0cqvlSAfyXVfrPJa25im5p+yEN/YmhlgQP/OyMZD"
+          crossorigin="anonymous"/>
+          <link rel="stylesheet" href="/static/stylesheets/forms.css">
+          <script src="https://unpkg.com/htmx.org@1.5.0"></script>
+          <style>
+            li a { font-weight: bold; }
+            .navbar-brand { font-weight: bold; } 
+          </style>
+    </head>
+    <body class="searchView">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark" class="nav">
+        <div class="container-fluid">
+          <a class="navbar-brand" class="fitfamlogo" href="https://fitfam.projectboxmedia.com/home">FitFam</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarColor02"
+            aria-controls="navbarColor02"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+              {% if current_user.is_authenticated %}
+              <li class="nav-item">
+                <a {% if active_page == 'home' %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="/home">Global</a>
+              </li>
+              <li class="nav-item">
+                <a {% if active_page == 'groups' %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="/groups">Groups</a>
+              </li>
+              <li class="nav-item">
+                <a {% if active_page == 'profile' %} class="nav-link active" {% else %} class="nav-link" {% endif %} href={{ url_for('profile', userId = current_user.id) }}>Profile</a>
+              </li>
+              <li class="nav-item">
+                <a {% if active_page == 'search' %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="/search">Search</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a {% if active_page == 'login' %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="/login">Login</a>
+              </li>
+              <li class="nav-item">
+                <a {% if active_page == 'signup' %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="/signup">Sign Up</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <p></p>
+      {% block content %}{% endblock %}
+    </body>
+</html>
